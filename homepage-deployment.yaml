@@ -35,7 +35,7 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   name: homepage
-                  key: settings.yaml
+                  key: HOMEPAGE_ALLOWED_HOSTS
           volumeMounts:
             - name: homepage-config
               mountPath: /app/config

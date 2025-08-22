@@ -11,15 +11,23 @@ metadata:
     gethomepage.dev/group: Cluster Management
     gethomepage.dev/icon: homepage.png
     gethomepage.dev/name: Homepage
+    kubernetes.io/tls-acme: "true"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
 spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - "homepage.dyn.cloud.e-infra.cz"
+      secretName: homepage-dyn-cloud-e-infra-cz-tls
   rules:
-    - host: "homepage.my.network"
+    - host: "homepage.dyn.cloud.e-infra.cz"
       http:
         paths:
-          - path: "/"
-            pathType: Prefix
-            backend:
+          - backend:
               service:
                 name: homepage
                 port:
                   number: 3000
+            pathType: ImplementationSpecific
+            path: "/"
+            pathType: Prefix
