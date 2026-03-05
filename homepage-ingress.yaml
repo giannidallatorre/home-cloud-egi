@@ -17,9 +17,21 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
+        - "home.cloud.egi.eu"
         - "homepage.dyn.cloud.e-infra.cz"
-      secretName: homepage-dyn-cloud-e-infra-cz-tls
+      secretName: homepage-cloud-egi-eu-tls
   rules:
+    - host: "home.cloud.egi.eu"
+      http:
+        paths:
+          - backend:
+              service:
+                name: homepage
+                port:
+                  number: 3000
+            pathType: ImplementationSpecific
+            path: "/"
+            pathType: Prefix
     - host: "homepage.dyn.cloud.e-infra.cz"
       http:
         paths:

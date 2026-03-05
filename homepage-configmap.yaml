@@ -6,7 +6,7 @@ metadata:
   labels:
     app.kubernetes.io/name: homepage
 data:
-  HOMEPAGE_ALLOWED_HOSTS: "homepage.dyn.cloud.e-infra.cz,gethomepage.dev,127.0.0.1,localhost"
+  HOMEPAGE_ALLOWED_HOSTS: "home.cloud.egi.eu,homepage.dyn.cloud.e-infra.cz,gethomepage.dev,127.0.0.1,localhost"
   kubernetes.yaml: |
     mode: cluster
   settings.yaml: |
