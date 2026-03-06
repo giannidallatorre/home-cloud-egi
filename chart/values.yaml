@@ -138,27 +138,101 @@ config:
       saturate: 20
       brightness: 255
       opacity: 5
-    theme: dark
+    theme: auto
 
   custom.css: |
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
+    :root {
+      --egi-blue: #005FAA;
+      --egi-orange: #EF8200;
+      --egi-ice-blue: #F1F8FF;
+      --egi-dark-blue: #1E325C;
+      --egi-light-gray: #F7F6F7;
+      --egi-dark-gray: #999999;
+      --egi-border-gray: #E4E4E4;
+      --egi-success: #63C247;
+      --egi-warning: #FFC000;
+      --egi-error: #FF000E;
+    }
+
     body {
-    background-color: #ffffff;
-    color: #005FAA;
-    font-family: "Open Sans", Arial, sans-serif;
+      font-family: 'DM Sans', sans-serif !important;
+      -webkit-font-smoothing: antialiased;
     }
-    button, .btn {
-    background-color: #EF8200 !important;
-    color: #ffffff !important;
-    border-radius: 6px;
-    font-weight: bold;
+
+    /* Light Theme Adjustments */
+    .light {
+      --bg-color: #ffffff;
+      --card-bg: var(--egi-light-gray);
+      --text-color: var(--egi-dark-gray);
+      --title-color: var(--egi-blue);
     }
-    button:hover, .btn:hover, .btn-primary:hover {
-    background-color: #FF9C4D !important;
-    color: #ffffff !important;
+
+    /* Dark Theme Adjustments */
+    .dark {
+      --bg-color: var(--egi-dark-blue);
+      --card-bg: rgba(255, 255, 255, 0.03);
+      --text-color: #ffffff;
+      --title-color: #ffffff;
     }
-    header {
-    background: #ffffff;
-    border-bottom: 3px solid #EF8200;
+
+    /* Typography & Headers */
+    h1, h2, h3, h4, .header-anchor {
+      color: var(--title-color) !important;
+      font-family: 'DM Sans', sans-serif !important;
+      font-weight: 700 !important;
+    }
+
+    .group-header h2 {
+      border-bottom: 2px solid var(--egi-orange);
+      padding-bottom: 0.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Cards & Interaction Elements */
+    .card, .btn, button, .search-input {
+      border-radius: 6px !important; /* Page 36 of Brand Guide */
+    }
+
+    .card {
+      border: 1px solid var(--egi-border-gray) !important;
+      background-color: var(--card-bg) !important;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      border-color: var(--egi-blue) !important;
+    }
+
+    /* Buttons */
+    .btn-primary, button[type="submit"] {
+      background-color: var(--egi-orange) !important;
+      color: #ffffff !important;
+      border: none !important;
+      font-weight: 700 !important;
+    }
+
+    .btn-primary:hover, button[type="submit"]:hover {
+      filter: brightness(1.1);
+    }
+
+    /* Search & Widgets */
+    .search-input {
+      border: 1px solid var(--egi-border-gray) !important;
+      background-color: var(--card-bg) !important;
+    }
+
+    .search-input:focus {
+      border-color: var(--egi-blue) !important;
+      outline: none;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar-thumb {
+      background: var(--egi-dark-gray) !important;
     }
 
   kubernetes.yaml: |
