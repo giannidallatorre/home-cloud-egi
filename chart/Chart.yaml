@@ -5,10 +5,10 @@ home: https://github.com/gethomepage/homepage
 icon: https://artifacthub.io/image/e417b561-5fe4-4ee3-9b89-f67df4069169
 kubeVersion: '>=1.23.0-0'
 maintainers:
-- email: ludovic.ortega@adminafk.fr
-  name: Ludovic Ortega
+  - email: ludovic.ortega@adminafk.fr
+    name: Ludovic Ortega
 name: homepage
 sources:
-- https://github.com/M0NsTeRRR/helm-charts/tree/main/charts/homepage
+  - https://github.com/M0NsTeRRR/helm-charts/tree/main/charts/homepage
 type: application
-version: 4.9.0
+version: 4.9.1
