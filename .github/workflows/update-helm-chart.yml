@@ -3,11 +3,9 @@ name: Update Helm Chart
 on:
   push:
     branches: [ main ]
-    # Only trigger if files within the chart directory change.
-    # This prevents infinite loops if the commit is filtered or
-    # unnecessary runs if you only update documentation.
     paths:
       - 'chart/**'
+  workflow_dispatch: # Allow testing the workflow manually
 
 jobs:
   upgrade-chart:
