@@ -21,6 +21,12 @@ jobs:
       - name: Lint Helm Chart
         run: helm lint chart/
 
+      - name: Get Git Metadata
+        id: git
+        run: |
+          echo "sha=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+          echo "date=$(git log -1 --format=%cd --date=format:'%b %d, %Y')" >> $GITHUB_OUTPUT
+
       - name: Deploy to Kubernetes
         env:
           KUBECONFIG_DATA: ${{ secrets.KUBECONFIG }}
@@ -36,11 +42,13 @@ jobs:
           chmod 600 ~/.kube/config
           export KUBECONFIG=~/.kube/config
 
-          # 2. Run the deployment with BEST PRACTICE flags:
+          # 2. Run the deployment with git metadata injected:
           helm upgrade --install homepage ./chart \
             --kubeconfig ~/.kube/config \
             -f ./chart/values.yaml \
             -n torre-ns \
+            --set gitSha=${{ steps.git.outputs.sha }} \
+            --set-string gitDate="${{ steps.git.outputs.date }}" \
             --rollback-on-failure \
             --wait \
             --timeout 5m

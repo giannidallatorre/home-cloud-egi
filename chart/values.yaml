@@ -143,7 +143,7 @@ config:
         // Exact same HTML classes as the right side, just different text/link
         egiRevisionDiv.innerHTML = `
           <span class="text-xs text-theme-500 dark:text-theme-400">
-            <a href="https://github.com/giannidallatorre/egi-services" target="_blank" rel="noopener noreferrer" class="mr-2 text-xs text-theme-500 dark:text-theme-400 flex flex-row items-center">EGI Revision: {{ .Release.Revision }} ({{ now | date "Mar 02, 2006" }})</a>
+            <a href="https://github.com/giannidallatorre/egi-services" target="_blank" rel="noopener noreferrer" class="mr-2 text-xs text-theme-500 dark:text-theme-400 flex flex-row items-center">EGI Revision: {{ .Values.gitSha }} ({{ .Values.gitDate }})</a>
           </span>
         `;
         
@@ -285,3 +285,6 @@ securityContext:
 podSecurityContext:
   fsGroup: 1000
   fsGroupChangePolicy: OnRootMismatch
+
+gitSha: "local"
+gitDate: "dev"
