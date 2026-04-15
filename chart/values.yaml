@@ -98,7 +98,7 @@ config:
         - EGI Foundation:
             - abbr: EGI
               href: https://www.egi.eu/
-    - Entertainment:
+    - Media & Training:
         - YouTube:
             - abbr: YT
               href: https://www.youtube.com/@EGI_eInfra
