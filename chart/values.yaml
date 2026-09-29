@@ -118,45 +118,22 @@ config:
       opacity: 5
 
   custom.js: |
-    // Wait for the DOM to be fully loaded
-    window.addEventListener("load", function() {
-      // Find the main footer container
-      const footer = document.getElementById("footer");
-      if (!footer) return;
+    const version = document.getElementById("version");
+    if (version && !document.getElementById("egi-revision")) {
+      version.classList.remove("justify-end");
+      version.classList.add("justify-between");
 
-      // Find the version wrapper div (which flexes justify-end by default)
-      const flexWrapperPattern = "flex mt-4 w-full justify-end";
-      const outerVersionDiv = Array.from(footer.getElementsByTagName('div')).find(div => 
-        div.className.includes("flex mt-4 w-full")
-      );
+      const egiRevision = document.createElement("div");
+      egiRevision.id = "egi-revision";
+      egiRevision.className = "flex flex-row items-center";
+      egiRevision.innerHTML = `
+        <span class="text-xs text-theme-500 dark:text-theme-400">
+          <a href="https://github.com/giannidallatorre/egi-services" target="_blank" rel="noopener noreferrer" class="mr-2 text-xs text-theme-500 dark:text-theme-400 flex flex-row items-center">EGI Revision: {{ .Values.gitSha }} ({{ .Values.gitDate }})</a>
+        </span>
+      `;
 
-      if (outerVersionDiv) {
-        // Change from end-alignment to space-between formatting
-        outerVersionDiv.classList.remove('justify-end');
-        outerVersionDiv.classList.add('justify-between');
-
-        // Create our new EGI Revision left element
-        const egiRevisionDiv = document.createElement("div");
-        egiRevisionDiv.className = "flex flex-row items-center";
-        
-        // Exact same HTML classes as the right side, just different text/link
-        egiRevisionDiv.innerHTML = `
-          <span class="text-xs text-theme-500 dark:text-theme-400">
-            <a href="https://github.com/giannidallatorre/egi-services" target="_blank" rel="noopener noreferrer" class="mr-2 text-xs text-theme-500 dark:text-theme-400 flex flex-row items-center">EGI Revision: {{ .Values.gitSha }} ({{ .Values.gitDate }})</a>
-          </span>
-        `;
-        
-        // Insert it as the first element in the wrapper (pushing it to the left)
-        outerVersionDiv.insertBefore(egiRevisionDiv, outerVersionDiv.firstChild);
-      }
-
-      // Hide the color picker button (v1.11.0 compatibility since aria-labels changed)
-      document.querySelectorAll('button').forEach(btn => {
-        if (btn.textContent.includes('Change color')) {
-          btn.style.display = 'none';
-        }
-      });
-    });
+      version.insertBefore(egiRevision, version.firstChild);
+    }
 
   custom.css: |
     @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
@@ -227,6 +204,10 @@ config:
     /* Custom Scrollbar */
     ::-webkit-scrollbar-thumb {
       background: var(--egi-blue) !important;
+    }
+
+    #color {
+      display: none !important;
     }
 
     /* Force 3 columns on Desktop, maintain stacking on Mobile */
