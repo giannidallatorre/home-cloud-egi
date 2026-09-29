@@ -26,11 +26,11 @@ config:
             href: https://notebooks.egi.eu/
             description: Jupyter - Interactive environment for scientific data analysis, visualization and collaborative sharing.
         - EGI Replay:
-            icon: https://www.google.com/s2/favicons?domain=mybinder.org&sz=32
+            icon: https://raw.githubusercontent.com/giannidallatorre/home-cloud-egi/main/assets/icons/binder.png
             href: https://replay.notebooks.egi.eu/
             description: Binder - Create interactive documents with live code, visualisations and text.
         - Workload Manager:
-            icon: https://www.google.com/s2/favicons?domain=dirac.egi.eu&sz=32
+            icon: https://raw.githubusercontent.com/giannidallatorre/home-cloud-egi/main/assets/icons/dirac.png
             href: https://dirac.egi.eu/
             description: DIRAC - manage and schedule workloads across EGI resources.
 
